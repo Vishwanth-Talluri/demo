@@ -58,22 +58,23 @@ public class PatientController {
                     existing.setPhone(updated.getPhone());
                     existing.setEmail(updated.getEmail());
                     existing.setAddress(updated.getAddress());
+
                     Patient saved = patientRepository.save(existing);
                     return ResponseEntity.ok(saved);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // DELETE
     @DeleteMapping("/{id}")
-public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
 
-    if (!patientRepository.existsById(id)) {
-        return ResponseEntity.notFound().build();
+        if (!patientRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        patientRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
-
-    patientRepository.deleteById(id);
-
-    return ResponseEntity.noContent().build();
-}
-
 }
