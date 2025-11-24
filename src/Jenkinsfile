@@ -51,7 +51,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 sh 'docker rm -f patient-service || true'
-                sh "docker run -d --name patient-service -p 8080:8080 ${DOCKER_IMAGE}:latest"
+                sh "docker run -d --name patient-service -p 8081:8081 ${DOCKER_IMAGE}:latest"
             }
         }
     }
